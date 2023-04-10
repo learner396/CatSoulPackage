@@ -1,16 +1,22 @@
 package com.catsoul.catsoulpackage;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.catsoul.catsoulpackage.ui.dashboard.DashboardFragment;
+import com.catsoul.catsoulpackage.ui.home.HomeFragment;
+import com.catsoul.catsoulpackage.ui.notifications.NotificationsFragment;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.catsoul.catsoulpackage.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationBarView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,15 +29,54 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+        setVariable();
     }
+
+    private void setVariable(){
+        MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(this);
+        List<Fragment> fragmentList =new ArrayList<>();
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new DashboardFragment());
+        fragmentList.add(new NotificationsFragment());
+        mainViewPagerAdapter.setFragmentList(fragmentList);
+        binding.mainVp.setAdapter(mainViewPagerAdapter);
+
+        binding.mainVp.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                switch (position){
+                    case 0:
+                        binding.navView.setSelectedItemId(R.id.navigation_home);
+                        break;
+                    case 1:
+                        binding.navView.setSelectedItemId(R.id.navigation_dashboard);
+                        break;
+                    case 2:
+                        binding.navView.setSelectedItemId(R.id.navigation_notifications);
+                        break;
+                }
+            }
+        });
+        binding.navView.setOnItemSelectedListener(onItemSelectedListener);
+    }
+
+private final NavigationBarView.OnItemSelectedListener onItemSelectedListener = new NavigationBarView.OnItemSelectedListener() {
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.navigation_home:
+                binding.mainVp.setCurrentItem(0);
+                break;
+            case R.id.navigation_dashboard:
+                binding.mainVp.setCurrentItem(1);
+                break;
+            case R.id.navigation_notifications:
+                binding.mainVp.setCurrentItem(2);
+                break;
+        }
+        return true;
+    }
+};
 
 }
