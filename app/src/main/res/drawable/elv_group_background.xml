@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 外层边框1 -->
+    <item>
+        <shape>
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="0dp"
+                android:top="@dimen/dp_1" />
+            <solid android:color="#6C49B8" />
+            <corners
+                android:bottomLeftRadius="28dp"
+                android:topLeftRadius="28dp" />
+        </shape>
+    </item>
+
+    <!-- 外层边框2 -->
+    <item>
+        <shape>
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="0dp"
+                android:top="@dimen/dp_1" />
+            <solid android:color="#FFF9F8F8" />
+            <corners
+                android:bottomLeftRadius="27dp"
+                android:topLeftRadius="27dp" />
+        </shape>
+    </item>
+
+    <!--  外层边框3 -->
+    <item>
+        <shape>
+            <padding
+                android:bottom="@dimen/dp_1"
+                android:left="@dimen/dp_1"
+                android:right="0dp"
+                android:top="@dimen/dp_1" />
+            <solid android:color="#FFFFBC42" />
+            <corners
+                android:bottomLeftRadius="26dp"
+                android:topLeftRadius="26dp" />
+        </shape>
+    </item>
+
+
+    <!-- 主体背景颜色值 -->
+    <item>
+
+        <!-- 边框里面背景颜色 白色 -->
+        <shape>
+            <solid android:color="#FFFFFF" />
+            <size
+                android:width="52dp"
+                android:height="52dp" />
+            <corners
+                android:bottomLeftRadius="26dp"
+                android:topLeftRadius="26dp" />
+        </shape>
+
+    </item>
+
+</layer-list>
