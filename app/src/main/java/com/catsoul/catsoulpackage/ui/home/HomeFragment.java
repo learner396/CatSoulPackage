@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.catsoul.catsoulpackage.adapter.HomeExpandableListAdapter;
 import com.catsoul.catsoulpackage.databinding.FragmentHomeBinding;
 import com.catsoul.catsoulpackage.ui.location.LocationActivity;
+import com.catsoul.catsoulpackage.ui.location.LocationSDKActivity;
 import com.catsoul.catsoulpackage.ui.weather.WeatherActivity;
 
 import java.util.ArrayList;
@@ -42,6 +43,8 @@ public class HomeFragment extends Fragment {
                     startActivity(new Intent(getContext(), WeatherActivity.class));
                 }else if (childData.get(i).get(i1).equals("Http定位")){
                     startActivity(new Intent(getContext(), LocationActivity.class));
+                }else if (childData.get(i).get(i1).equals("定位")){
+                    startActivity(new Intent(getContext(), LocationSDKActivity.class));
                 }
 
                 return true;
@@ -77,8 +80,10 @@ public class HomeFragment extends Fragment {
         List<String> childBase7 = new ArrayList<String>();
         List<String> childBase8 = new ArrayList<String>();
 
+        childBase1.add("常用");
         childBase2.add("天气");
         childBase2.add("Http定位");
+        childBase2.add("定位");
 
         childData.add(childBase1);
         childData.add(childBase2);

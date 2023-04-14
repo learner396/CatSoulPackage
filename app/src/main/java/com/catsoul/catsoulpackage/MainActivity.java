@@ -2,6 +2,8 @@ package com.catsoul.catsoulpackage;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.catsoul.catsoulpackage.ui.dashboard.DashboardFragment;
 import com.catsoul.catsoulpackage.ui.home.HomeFragment;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mainViewPagerAdapter.setFragmentList(fragmentList);
         binding.mainVp.setAdapter(mainViewPagerAdapter);
 
+        //ViewPager2滑动
         binding.mainVp.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -58,24 +61,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         binding.navView.setOnItemSelectedListener(onItemSelectedListener);
+
+        //点击Toolbar最左边的图标
+        binding.mainToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "狗屎", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-private final NavigationBarView.OnItemSelectedListener onItemSelectedListener = new NavigationBarView.OnItemSelectedListener() {
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.navigation_home:
-                binding.mainVp.setCurrentItem(0);
-                break;
-            case R.id.navigation_dashboard:
-                binding.mainVp.setCurrentItem(1);
-                break;
-            case R.id.navigation_notifications:
-                binding.mainVp.setCurrentItem(2);
-                break;
+    private final NavigationBarView.OnItemSelectedListener onItemSelectedListener = new NavigationBarView.OnItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.navigation_home:
+                    binding.mainVp.setCurrentItem(0);
+                    break;
+                case R.id.navigation_dashboard:
+                    binding.mainVp.setCurrentItem(1);
+                    break;
+                case R.id.navigation_notifications:
+                    binding.mainVp.setCurrentItem(2);
+                    break;
+            }
+            return true;
         }
-        return true;
-    }
-};
-
+    };
 }
