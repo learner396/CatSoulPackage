@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.catsoul.catsoulpackage.adapter.HomeExpandableListAdapter;
 import com.catsoul.catsoulpackage.databinding.FragmentHomeBinding;
+import com.catsoul.catsoulpackage.ui.location.LocationActivity;
 import com.catsoul.catsoulpackage.ui.weather.WeatherActivity;
 
 import java.util.ArrayList;
@@ -37,8 +38,10 @@ public class HomeFragment extends Fragment {
         binding.homeElv.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
-                if (childData.get(i).get(i1)=="天气"){
+                if (childData.get(i).get(i1).equals("天气")){
                     startActivity(new Intent(getContext(), WeatherActivity.class));
+                }else if (childData.get(i).get(i1).equals("Http定位")){
+                    startActivity(new Intent(getContext(), LocationActivity.class));
                 }
 
                 return true;
@@ -75,6 +78,7 @@ public class HomeFragment extends Fragment {
         List<String> childBase8 = new ArrayList<String>();
 
         childBase2.add("天气");
+        childBase2.add("Http定位");
 
         childData.add(childBase1);
         childData.add(childBase2);
