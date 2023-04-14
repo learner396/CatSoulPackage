@@ -1,7 +1,7 @@
 # CatSoulPackage
 Android App 一个小工具集合
 
-## 第三方SDK
+## 接入的第三方SDK
 
 ### 高德SDK
 包括：
